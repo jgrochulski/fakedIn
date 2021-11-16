@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>FakedIn</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header>
+      <img class="logo" src="images/logo.png" width="32" alt="logo">
+      <nav>
+        <ul class="nav_links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">My Network</a></li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Messaging</a></li>
+          <li><a href="#">Notifications</a></li>
+        </ul>
+      </nav>
+      <img class="nav_me" src="images/me.jpg" width="32" alt="user_icon">
+    </header>
+
+    <div class="row">
+      <div class="profile_column">
+        <img class="profile_column_me" src="images/me.jpg" alt="user_icon">
+        <h3 class="profile_column_header">Jan Grochulski</h3>
+          <div class="subtext" id="profile_intro">Software Engineering Student at Flatiron School</div>
+        <hr class="solid">
+        <div class="profile_column_content">
+          <div class="profile_div">
+            <div id="profile_who_views">Who viewed your profile</div>
+            <div id="profile_views">15</div>
+          </div>
+          <div>
+            <div id="profile_connections_text">Connections</div>
+            <div id="profile_connections">256</div>
+            <div class="small_titles">Grow your network</div>
+          </div>
+        </div>
+      <hr class="solid">
+      <div class="profile_column_content">
+        <div class="profile_div">
+          <div class="subtext_left">Access exclusive tools & insights</div>
+          <span>
+            <img id="premium_icon" src="images/premium_icon.png" width="12" alt="user_icon">
+            <span class="small_titles">Retry Premium Free</span>
+          </span>
+        </div>
+      </div>
+      <hr class="solid">
+      <div class="profile_column_content" id="my_items">
+        <div class="profile_div">
+          <span>
+            <img id="bookmark_icon" src="images/bookmark.png" width="10" alt="user_icon">
+            <span class="small_titles">My items</span>
+          </span>
+        </div>
+      </div>
+      <div id="edit_profile">
+        <hr class="solid">
+      <div class="profile_column_content" id="my_items">
+        <div class="profile_div">
+          <form class="edit_profile_form">
+            <h4 id="edit_profile_h4">Edit profile</h4>
+            <input
+              type="text"
+              name="name"
+              value=""
+              placeholder="Update name..."
+              class="input-text"
+              id="profile_name_input"
+            />
+            <br />
+            <input
+              type="text"
+              name="intro"
+              value=""
+              placeholder="Update tagline..."
+              class="input-text"
+              id="profile_tagline_input"
+            />
+            <br />
+            <input
+              type="text"
+              name="image"
+              value=""
+              placeholder="Update profile picture..."
+              class="input-text"
+              id="profile_image_input"
+            />
+            <br />
+            <input
+              type="submit"
+              name="submit"
+              value="Submit"
+              class="submit"
+              id="profile_update_submit"
+            />
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+
+      <div class="content_column">
+        <div class="create_post">
+          <!-- TEXT 1 -->
+          <div class="create_post_container">
+            <img class="create_post_me" src="images/me.jpg" alt="user_icon">
+            <form class="add_post_form">
+              <!-- <h3>Create a toy!</h3> -->
+              
+              <input
+                type="text"
+                name="name"
+                value=""
+                placeholder="Start a post"
+                class="input-text"
+              />
+              <!-- <br /> -->
+              <!-- <input
+                type="text"
+                name="image"
+                value=""
+                placeholder="Attach an image URL"
+                class="input-text"
+              /> -->
+              <!-- <br /> -->
+              <input
+                type="submit"
+                name="submit"
+                value="✓"
+                class="submit_button"
+              />
+            </form>
+          </div>
+        </div>
+        
+        <!-- CONTENT POST IS HERERERERERERERERE -->
+        <!-- <div class="content_post">
+          <div class="content_post_inner">
+            <div class="content_profile">
+              <img class="content_profile_img" src="images/me.jpg" alt="user_icon">
+              <div class="content_profile_stack">
+                <span class="stack_name_span">
+                  <div class="stack_firstname_lastname">
+                    Firstname Lastname
+                  </div>
+                  <div class="stack_connection">
+                     • 3rd
+                  </div>
+                </span>
+                <br/>
+                <span class="stack_title">
+                  Senior Account Executive at Company
+                </span>
+                <br/>
+                <span class="stack_time">
+                  10h •
+                </span>
+                <img class="global" src="images/global.png" width="14" alt="user_icon">
+              </div>
+            </div>
+            <div class="content_text">Holistically E-enable Extensive Internal Or "Organic" Sources</div>
+            <div class="content_image">
+              <img class="content_image_img" src="images/generic.jpeg" alt="content_image">
+            </div>
+            <div class="content_likes">
+              <span class="likes_span">
+                <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
+                <span class="number_likes">11</span>
+              </span>
+            </div>
+            <hr class="solid">
+            <span class="bottom_buttons">
+              <input type="button" class="like_button" value="      Like" />
+              <input type="button" class="comment_button" value="        Comment" />
+            </span>
+          </div>
+        </div> -->
+        <!-- CONTENT POST ENDS HERERERERERERERERE -->
+      </div>
+      <div class="news_column">
+      <div class="news_container">
+        <h2>FakedIn News</h2>
+        <ul class="news_list">
+          <!-- <li class="list_title">
+            Calls after work? That's Illegal.
+            <p class="list_subtext">1hr ago • 62,810 readers</p>
+          </li>
+          <li class="list_title">
+            Calls after work? That's Illegal.
+            <p class="list_subtext">1hr ago • 62,810 readers</p>
+          </li>
+          <li class="list_title">
+            Calls after work? That's Illegal.
+            <p class="list_subtext">1hr ago • 62,810 readers</p>
+          </li>
+          <li class="list_title">
+            Calls after work? That's Illegal.
+            <p class="list_subtext">1hr ago • 62,810 readers</p>
+          </li>
+          <li class="list_title">
+            Calls after work? That's Illegal.
+            <p class="list_subtext">1hr ago • 62,810 readers</p>
+          </li> -->
+        </ul>
+      </div>
+      </div>
+    </div>
+
+    <!-- <p style="text-align:center">
+      Andy needs your help! <button id="new-toy-btn">Add a new toy!</button>
+    </p> -->
+
+    <div id="toy-collection"></div>
+    <script type="text/javascript" src="src/index.js"></script>
+  </body>
+</html>
+
+

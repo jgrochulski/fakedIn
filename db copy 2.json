@@ -1,0 +1,356 @@
+{
+  "jobs": [
+    {
+      "id": 1,      
+      "name": "Sales Associate"
+    },  
+    {
+      "id": 2,  
+      "name": "Sales Representative"
+    },  
+    {
+      "id": 3,  
+      "name": "Sales Manager"
+    },  
+    {
+      "id": 4,  
+      "name": "Retail Worker"
+    },  
+    {
+      "id": 5,  
+      "name": "Store Manager"
+    },  
+    {
+      "id": 6,  
+      "name": "Sales Representative"
+    },  
+    {
+      "id": 7,  
+      "name": "Sales Manager"
+    },  
+    {
+      "id": 8,  
+      "name": "Real Estate Broker"
+    },  
+    {
+      "id": 9,  
+      "name": "Sales Associate"
+    },  
+    {
+      "id": 10,  
+      "name": "Cashier"
+    },  
+    {
+      "id": 11,  
+      "name": "Store Manager"
+    },  
+    {
+      "id": 12,  
+      "name": "Account Executive"
+    },  
+    {
+      "id": 13,  
+      "name": "Account Manager"
+    },  
+    {
+      "id": 14,  
+      "name": "Area Sales Manager"
+    },  
+    {
+      "id": 15,  
+      "name": "Direct Salesperson"
+    },  
+    {
+      "id": 16,  
+      "name": "Director of Inside Sales"
+    },  
+    {
+      "id": 17,  
+      "name": "Outside Sales Manager"
+    },  
+    {
+      "id": 18,  
+      "name": "Sales Analyst"
+    },  
+    {
+      "id": 19,  
+      "name": "Market Development Manager"
+    },  
+    {
+      "id": 20,  
+      "name": "B2B Sales Specialist"
+    },  
+    {
+      "id": 21,  
+      "name": "Sales Engineer"
+    },  
+    {
+      "id": 22,  
+      "name": "Merchandising Associate"
+    },  
+    {
+      "id": 23,  
+      "name": "Marketing"
+    },  
+    {
+      "id": 24,  
+      "name": "Marketing Specialist"
+    },  
+    {
+      "id": 25,  
+      "name": "Marketing Manager"
+    },  
+    {
+      "id": 26,  
+      "name": "Marketing Director"
+    },  
+    {
+      "id": 27,  
+      "name": "Graphic Designer"
+    },  
+    {
+      "id": 28,  
+      "name": "Marketing Research Analyst"
+    },  
+    {
+      "id": 29,  
+      "name": "Marketing Communications Manager"
+    },  
+    {
+      "id": 30,  
+      "name": "Marketing Consultant"
+    },  
+    {
+      "id": 31,  
+      "name": "Product Manager"
+    },  
+    {
+      "id": 32,  
+      "name": "Public Relations"
+    },  
+    {
+      "id": 33,  
+      "name": "Social Media Assistant"
+    },  
+    {
+      "id": 34,  
+      "name": "Brand Manager"
+    },  
+    {
+      "id": 35,  
+      "name": "SEO Manager"
+    },  
+    {
+      "id": 36,  
+      "name": "Content Marketing Manager"
+    },  
+    {
+      "id": 37,  
+      "name": "Copywriter"
+    },  
+    {
+      "id": 38,  
+      "name": "Media Buyer"
+    },  
+    {
+      "id": 39,  
+      "name": "Digital Marketing Manager"
+    },  
+    {
+      "id": 40,  
+      "name": "eCommerce Marketing Specialist"
+    },  
+    {
+      "id": 41,  
+      "name": "Brand Strategist"
+    },  
+    {
+      "id": 42,  
+      "name": "Vice President of Marketing"
+    },  
+    {
+      "id": 43,  
+      "name": "Media Relations Coordinator"
+    },  
+    {
+      "id": 44,  
+      "name": "Administrative Assistant"
+    },  
+    {
+      "id": 45,  
+      "name": "Receptionist"
+    },  
+    {
+      "id": 46,  
+      "name": "Office Manager"
+    },  
+    {
+      "id": 47,  
+      "name": "Auditing Clerk"
+    },  
+    {
+      "id": 48,  
+      "name": "Bookkeeper"
+    },  
+    {
+      "id": 49,  
+      "name": "Account Executive"
+    },  
+    {
+      "id": 50,  
+      "name": "Branch Manager"
+    },  
+    {
+      "id": 51,  
+      "name": "Business Manager"
+    },  
+    {
+      "id": 52,  
+      "name": "Quality Control Coordinator"
+    },  
+    {
+      "id": 53,  
+      "name": "Administrative Manager"
+    },  
+    {
+      "id": 54,  
+      "name": "Chief Executive Officer"
+    },  
+    {
+      "id": 55,  
+      "name": "Business Analyst"
+    },  
+    {
+      "id": 56,  
+      "name": "Risk Manager"
+    },  
+    {
+      "id": 57,  
+      "name": "Human Resources"
+    },  
+    {
+      "id": 58,  
+      "name": "Office Assistant"
+    },  
+    {
+      "id": 59,  
+      "name": "Secretary"
+    },  
+    {
+      "id": 60,  
+      "name": "Office Clerk"
+    },  
+    {
+      "id": 61,  
+      "name": "File Clerk"
+    },  
+    {
+      "id": 62,  
+      "name": "Account Collector"
+    },  
+    {
+      "id": 63,  
+      "name": "Administrative Specialist"
+    },  
+    {
+      "id": 64,  
+      "name": "Executive Assistant"
+    },  
+    {
+      "id": 65,  
+      "name": "Program Administrator"
+    },  
+    {
+      "id": 66,  
+      "name": "Program Manager"
+    },  
+    {
+      "id": 67,  
+      "name": "Administrative Analyst"
+    },  
+    {
+      "id": 68,  
+      "name": "Data Entry"
+    },  
+    {
+      "id": 69,  
+      "name": "Computer Scientist"
+    },  
+    {
+      "id": 70,  
+      "name": "IT Professional"
+    },  
+    {
+      "id": 71,  
+      "name": "UX Designer & UI Developer"
+    },  
+    {
+      "id": 72,  
+      "name": "SQL Developer"
+    },  
+    {
+      "id": 73,  
+      "name": "Web Designer"
+    },  
+    {
+      "id": 74,  
+      "name": "Web Developer"
+    },  
+    {
+      "id": 75,  
+      "name": "Help Desk Worker/Desktop Support"
+    },  
+    {
+      "id": 76,  
+      "name": "Software Engineer"
+    },  
+    {
+      "id": 77,  
+      "name": "Data Entry"
+    },  
+    {
+      "id": 78,  
+      "name": "DevOps Engineer"
+    },  
+    {
+      "id": 79,  
+      "name": "Computer Programmer"
+    },  
+    {
+      "id": 80,  
+      "name": "Network Administrator"
+    },  
+    {
+      "id": 81,  
+      "name": "Information Security Analyst"
+    },  
+    {
+      "id": 82,  
+      "name": "Artificial Intelligence Engineer"
+    },  
+    {
+      "id": 83,  
+      "name": "Cloud Architect"
+    },  
+    {
+      "id": 84,  
+      "name": "IT Manager"
+    },  
+    {
+      "id": 85,  
+      "name": "Technical Specialist"
+    },  
+    {
+      "id": 86,  
+      "name": "Application Developer"
+    },  
+    {
+      "id": 87,  
+      "name": "Chief Technology Officer (CTO)"
+    },  
+    {
+      "id": 88,  
+      "name": "Chief Information Officer (CIO)"
+    }
+  ]
+}
