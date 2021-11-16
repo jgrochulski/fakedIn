@@ -225,6 +225,7 @@ input.submit_button:hover {
 .profile_column_me {
   margin-top: 15px;
   width: 75px;
+  height: 75px;
   position: relative;
   left: 71px;
   border: 2px solid #ffffff;

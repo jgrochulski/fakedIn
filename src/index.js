@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch(myURL)
   .then(resp => resp.json())
   .then(myProfile => {
-    console.log(myProfile.name);
+    // console.log(myProfile.name);
 
     const myName = dqs('.profile_column_header');
     const myIntro = dqs('#profile_intro');
@@ -65,6 +65,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   })
+
+  // profile update funcitonality                                 HERE HERE HERE                    !!!
+
+  const profUpdate = dqs('#edit_profile_form');
+  // console.log(nameUpdate);
+  profUpdate.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const myName = dqs('.profile_column_header');
+    const myIntro = dqs('#profile_intro');
+    const myImage = dqs('.profile_column_me');
+
+    newName = e.target.name.value;
+    newTagline = e.target.intro.value;
+    newImage = e.target.image.value;
+    console.log(e.target.intro.value);
+    console.log(e.target.image.value);
+
+    myName.textContent = newName;
+    myIntro.textContent = newTagline;
+    myImage.src = newImage;
+
+    e.reset()
+
+
+  })
+
+
 
   // build content 
   for (i = 0; i < postCount; i++) {
@@ -144,15 +172,15 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(buzzURL)
     .then(resp => resp.json())
     .then(phrase => {
-      console.log(`second fetch phrase for news: ${phrase.phrase}`);
+      // console.log(`second fetch phrase for news: ${phrase.phrase}`);
 
       const time = postTime();
-      console.log(time);
+      // console.log(time);
 
       const num = numReaders();
 
       const newsList = dqs('.news_list');
-      console.log(newsList);
+      // console.log(newsList);
 
       let li = document.createElement('li');
       li.className = 'list_title';
@@ -539,7 +567,7 @@ function createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, ti
       
       if (i === randPara - 1) {
         buzzPara = buzzPara + conjunction[Math.floor(Math.random()*conjunction.length)] + phrase.phrase.toLowerCase() + punctuation[Math.floor(Math.random()*punctuation.length)];
-        console.log(buzzPara);
+        // console.log(buzzPara);
         renderParagraphPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPara)
       }
       else {
