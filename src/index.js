@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     myIntro.textContent = newTagline;
     myImage.src = newImage;
 
-    e.reset()
+    e.target.reset();
 
 
   })
