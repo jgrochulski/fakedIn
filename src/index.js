@@ -1,7 +1,7 @@
 // ----------------------  GLOBAL DECLARATIONS  ---------------------  //
 
 const buzzURL = 'https://corporatebs-generator.sameerkumar.website/';
-const profileURL = 'https://randomuser.me/api/';
+const profilesURL = 'https://randomuser.me/api/';
 const userURL = 'http://localhost:3000/user';
 const jobURL = 'http://localhost:3000/jobs';
 const companiesURL = 'http://localhost:3000/companies';
@@ -18,6 +18,7 @@ const minConnections = 50;
 let editUser = false;
 let createPost = false;
 
+let currentUser = {};
 
 // ------------------------------------------------------------------  //
 
@@ -32,10 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
     header: dqs('.profile_column'),
     edit: dqs('#edit_profile'),
     views: dqs('#profile_views'),
-    connections:dqs('#profile_connections')
+    connections: dqs('#profile_connections'),
+    update: dqs('#edit_profile_form')
   };
 
-  const profUpdate = dqs('#edit_profile_form');
+  const postDOM = {
+    container: dqs('.create_post'),
+    start: dqs('#start_a_post_button'),
+    create: dqs('.create_post_form_container'),
+    form: dqs('#create_post_form'),
+
+  };
+
+  // const profUpdate = dqs('#edit_profile_form');
 
   // ssd wip below 
 
@@ -50,94 +60,153 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --------------------- set up event handlers here ------------------------------------- // 
   userDOM.name.addEventListener('click', () => {
-    editUser = toggleDisplay(editUser, userDOM);
+    editUser = toggleDisplay(editUser, userDOM.edit);
   });
 
+  userDOM.update.addEventListener('submit', e => {
+    e.preventDefault();
+    updateUser(e);
+    e.target.reset();
+  });
+
+  postDOM.start.addEventListener('click', e => {
+    e.preventDefault();
+    createPost = toggleDisplay(createPost, postDOM.create);
+  });
+
+  postDOM.form.addEventListener('submit', e => {
+    e.preventDefault();
+    appendPost(e);
+    // will work here after rendering posts ~~~~~~~~~~~~~~~~~~~~~~~~
+
+    e.target.reset();
+  });
+
+  // #######################################################################
+
+  function appendPost(e) {
   
+    const postFeed = dqs('.content_column');
+
+    const text = e.target.postContent.value;
+    const img = e.target.image.value;
+  
+    let post = document.createElement('div');
+    post.className = 'content_post';
+    post.innerHTML = `
+    <div class="content_post_inner">
+      <div class="content_profile">
+        <img class="content_profile_img" src="${currentUser.image}" alt="user_icon">
+        <div class="content_profile_stack">
+          <span class="stack_name_span">
+            <div class="stack_firstname_lastname">
+              ${currentUser.name}
+            </div>
+            <div class="stack_connection">
+              • me
+            </div>
+          </span>
+          <br/>
+          <span class="stack_title">
+            ${currentUser.tagline}
+          </span>
+          <br/>
+          <span class="stack_time">
+            Just Now •
+          </span>
+          <img class="global" src="images/global.png" width="14" alt="user_icon">
+        </div>
+      </div>
+      <div class="content_text">${text}</div>
+      <div class="content_image">
+        <img class="content_image_img" src="${img}" alt="content_image">
+      </div>
+      <div class="content_likes">
+        <span class="likes_span">
+          <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
+          <span class="number_likes">11</span>
+        </span>
+      </div>
+      <hr class="solid">
+      <span class="bottom_buttons">
+        <input type="button" class="like_button" value="      Like" />
+        <input type="button" class="comment_button" value="        Comment" />
+      </span>
+    </div>
+    `;
+  
+    // postFeed.prepend(post);
+
+    createPost = toggleDisplay(createPost, postDOM.create);
+
+    // postFeed.prepend(postDOM.container);
+    const referenceNode = postDOM.create;
+
+    newNode = post;
+
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+
+
+
+
+
+
+    // console.log(postDOM.start);
+
+    // postDOM.start.addEventListener('click', e => {
+    //   e.preventDefault();
+    //   createPost = toggleDisplay(createPost, postDOM.create);
+    // });
+  
+    // postDOM.form.addEventListener('submit', e => {
+    //   e.preventDefault();
+    //   appendPost(e);
+    //   // will work here after rendering posts ~~~~~~~~~~~~~~~~~~~~~~~~
+  
+    //   e.target.reset();
+    // });
+
+
+  }
+
+  // #######################################################################
+  
+
+  // -------------------- first fetch here ------------------------------------------------ //
   fetch(userURL)
   .then(resp => resp.json())
   .then(user => {
     renderUser(user, userDOM);
+    currentUser = user;
+    // console.log(currentUser);
   });
 
-  // profile update funcitonality                                 HERE HERE HERE                    !!!
-
-  // console.log(nameUpdate);
-  profUpdate.addEventListener('submit', e => {
-    e.preventDefault();
-    updateProfile(e);
-    e.target.reset();
-  })
-
-  //  create post toggle
-
-  const startPostButton = dqs('#start_a_post_button');
-
-  startPostButton.addEventListener('click', e => {
-    e.preventDefault();
-
-    createPostContainer = dqs('.create_post_form_container');
-
-    createPost = !createPost;
-    if (createPost) {
-      createPostContainer.style.display = "block";
-    }
-    else {
-      createPostContainer.style.display = "none"
-    }
-
-
-  })
-
-  // add create a post event listeners  ================================================
-
-  const createPostForm = dqs('#create_post_form');
-  
-  // document.addEventListener('submit', e => {
-  //   e.preventDefault();
-  //   const newPostContent = e.target.postContent.value;
-  //   const newPostImage = e.target.image.value;
-
-  
-  //   renderMyPost(user.image, user.name, "me", user.intro, "blank", "Just now", newPostContent, newPostImage)
-
-  //   e.target.reset();
-  // })
-
-
-
+  // -------------------- second fetch here ------------------------------------------------ //
   // build content 
-  for (i = 0; i < postCount; i++) {
-    fetch(profileURL)
+  for (let i = 0; i < postCount; i++) {
+
+    fetch(profilesURL)
     .then(resp => resp.json())
     .then(profile => {
       const fakeProfile = profile.results[0];
       const fakeImg = fakeProfile.picture.medium;
       const fakeName = `${fakeProfile.name.first} ${fakeProfile.name.last}`;
-      // console.log(fakeProfile);
-      // console.log(fakeImg);
-      // console.log(fakeName);
 
       let id = Math.ceil(Math.random() * 88);
-      // console.log(id);
+
       fetch(`${jobURL}/${id}`)
       .then(resp => resp.json())
       .then(job => {
         const fakeJob = job.name;
-        // console.log(`the fake job is: ${fakeJob}`);
 
         const time = postTime();
-        // console.log(time);
-        
         const degree = connectionDegree();
-        // console.log(degree);
 
         fetch(companiesURL)
         .then(resp => resp.json())
         .then(companies => {
           const randC = Math.floor(Math.random() * 500);
-          // console.log(randC);
-          // console.log(companies[0][randC]);
+
           const fakeCompany = companies[0][randC];
 
           fetch(buzzURL)
@@ -145,8 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
           .then(phrase => {
 
             const buzzPhrase = phrase.phrase;
-            // console.log(buzzPhrase);
-            // console.log('we are here');
 
             const randPost = Math.random();
 
@@ -156,43 +223,31 @@ document.addEventListener("DOMContentLoaded", () => {
               .then(img => {
                 const postImg = img[Math.floor(Math.random() * img.length)];
                 renderPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase, postImg);
-              })
+              });
             }
             else {
               createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase);
-              // console.log(buzzParagraph);
-              // console.log(`typeof = ${typeof buzzParagraph}`);
-              // renderParagraphPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzParagraph);
-
             }
 
-          })
-
+          });
           
-
-        })
-
-        
+        });
 
       });
 
-
     });
-  }
+  };
 
-  for (i = 0; i < newsCount; i++) {
+  for (let i = 0; i < newsCount; i++) {
+
     fetch(buzzURL)
     .then(resp => resp.json())
     .then(phrase => {
-      // console.log(`second fetch phrase for news: ${phrase.phrase}`);
 
       const time = postTime();
-      // console.log(time);
-
       const num = numReaders();
 
       const newsList = dqs('.news_list');
-      // console.log(newsList);
 
       let li = document.createElement('li');
       li.className = 'list_title';
@@ -206,68 +261,6 @@ document.addEventListener("DOMContentLoaded", () => {
       newsList.appendChild(li);
     })
   }
-
-
-  // const postFeed = dqs('.content_column');
-  // console.log(postFeed);
-
-
-
-  // let post = document.createElement('div');
-  // post.className = 'content_post';
-  // post.innerHTML = `
-  // <div class="content_post_inner">
-  //   <div class="content_profile">
-  //     <img class="content_profile_img" src="images/me.jpg" alt="user_icon">
-  //     <div class="content_profile_stack">
-  //       <span class="stack_name_span">
-  //         <div class="stack_firstname_lastname">
-  //           Firstname Lastname
-  //         </div>
-  //         <div class="stack_connection">
-  //           • 3rd
-  //         </div>
-  //       </span>
-  //       <br/>
-  //       <span class="stack_title">
-  //         Senior Account Executive at Company
-  //       </span>
-  //       <br/>
-  //       <span class="stack_time">
-  //         10h •
-  //       </span>
-  //       <img class="global" src="images/global.png" width="14" alt="user_icon">
-  //     </div>
-  //   </div>
-  //   <div class="content_text">Holistically E-enable Extensive Internal Or "Organic" Sources</div>
-  //   <div class="content_image">
-  //     <img class="content_image_img" src="images/generic.jpeg" alt="content_image">
-  //   </div>
-  //   <div class="content_likes">
-  //     <span class="likes_span">
-  //       <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
-  //       <span class="number_likes">11</span>
-  //     </span>
-  //   </div>
-  //   <hr class="solid">
-  //   <span class="bottom_buttons">
-  //     <input type="button" class="like_button" value="      Like" />
-  //     <input type="button" class="comment_button" value="        Comment" />
-  //   </span>
-  // </div>
-  // `;
-
-  // postFeed.appendChild(post);
-
-  // getBuzzPhrase();
-
-  // getFakeProfile();
-
-  // getFakeJob();
-
-  // connectionDegree();
-
-  // postTime();
 
 });
 
@@ -303,13 +296,13 @@ function renderUser(user, userDOM) {
 // ------------------------------------------------------------------  //
 // ------------------------------------------------------------------  //
 
-function toggleDisplay(toggle, userDOM) {
+function toggleDisplay(toggle, target) {
   toggle = !toggle;
   if (toggle) {
-    userDOM.edit.style.display = "block";
+    target.style.display = "block";
   } 
   else {
-    userDOM.edit.style.display = "none";
+    target.style.display = "none";
   }
   return toggle;
 };
@@ -317,7 +310,7 @@ function toggleDisplay(toggle, userDOM) {
 // ------------------------------------------------------------------  //
 // ------------------------------------------------------------------  //
 
-function updateProfile(e) {
+function updateUser(e) {
   console.log('working');
 
   newName = e.target.name.value;
@@ -356,9 +349,16 @@ function updateProfile(e) {
   myImage3.src = newImage;
 }
 
+// ------------------------------------------------------------------  //
+// ------------------------------------------------------------------  //
 
+function appendPost(e) {
+  newContent = e.target.postContent.value;
+  newImage = e.target.image.value;
 
+  console.log(currentUser);
 
+};
 
 
 
@@ -389,7 +389,7 @@ function getBuzzPhrase() {
 // ------------------------------------------------------------------  //
 
 function getFakeProfile() {
-  fetch(profileURL)
+  fetch(profilesURL)
   .then(resp => resp.json())
   .then(profile => {
     // console.log(profile.results[0].name.first+' '+profile.results[0].name.last);
@@ -583,7 +583,6 @@ function renderParagraphPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, ti
   // console.log(postFeed);
 
 
-
   let post = document.createElement('div');
   post.className = 'content_post';
   post.innerHTML = `
@@ -692,53 +691,3 @@ function createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, ti
 
 //
 
-function renderMyPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase, postImg) {
-  
-  const postFeed = dqs('.content_column');
-
-  let post = document.createElement('div');
-  post.className = 'content_post';
-  post.innerHTML = `
-  <div class="content_post_inner">
-    <div class="content_profile">
-      <img class="content_profile_img" src="${fakeImg}" alt="user_icon">
-      <div class="content_profile_stack">
-        <span class="stack_name_span">
-          <div class="stack_firstname_lastname">
-            ${fakeName}
-          </div>
-          <div class="stack_connection">
-            • ${degree}
-          </div>
-        </span>
-        <br/>
-        <span class="stack_title">
-          ${fakeJob} at ${fakeCompany}
-        </span>
-        <br/>
-        <span class="stack_time">
-          ${time} •
-        </span>
-        <img class="global" src="images/global.png" width="14" alt="user_icon">
-      </div>
-    </div>
-    <div class="content_text">${buzzPhrase}</div>
-    <div class="content_image">
-      <img class="content_image_img" src="${postImg}" alt="content_image">
-    </div>
-    <div class="content_likes">
-      <span class="likes_span">
-        <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
-        <span class="number_likes">11</span>
-      </span>
-    </div>
-    <hr class="solid">
-    <span class="bottom_buttons">
-      <input type="button" class="like_button" value="      Like" />
-      <input type="button" class="comment_button" value="        Comment" />
-    </span>
-  </div>
-  `;
-
-  postFeed.prepend(post);
-}
