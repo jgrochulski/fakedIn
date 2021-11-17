@@ -1,7 +1,7 @@
 {
-  "myProfile": {
+  "user": {
     "name": "Janek Grochulski",
-    "intro": "Software Engineering Student at Flatiron School",
+    "tagline": "Software Engineering Student at Flatiron School",
     "image": "./images/me.jpg",
     "header": "./images/header.jpg"
   },

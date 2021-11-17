@@ -2,12 +2,11 @@
 
 const buzzURL = 'https://corporatebs-generator.sameerkumar.website/';
 const profileURL = 'https://randomuser.me/api/';
-const userURL = 'http://localhost:3000/user';
+const myURL = 'http://localhost:3000/myProfile';
 const jobURL = 'http://localhost:3000/jobs';
 const companiesURL = 'http://localhost:3000/companies';
 const imgURL = 'http://localhost:3000/images';
-const defaultImg = "./images/default_profile_small.png"
-
+const defaultImg = "./images/default_profile_small.png";
 
 const postCount = 5;
 const verbosity = 5;
@@ -15,8 +14,8 @@ const newsCount = 6;
 const maxViews = 36;
 const minConnections = 50;
 
-let editUser = false;
-let createPost = false;
+let edit = false;
+let post = false;
 
 
 // ------------------------------------------------------------------  //
@@ -24,49 +23,74 @@ let createPost = false;
 //  ----------------------  // MAIN FUNCTION // ---------------------- //
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ------------------------ declare all DOM element selectors here ---------------------- //
-  const userDOM = {
-    name: dqs('.profile_column_header'),
-    tagline: dqs('#profile_intro'),
-    image: dqs('.profile_column_me'),
-    header: dqs('.profile_column'),
-    edit: dqs('#edit_profile'),
-    views: dqs('#profile_views'),
-    connections:dqs('#profile_connections')
-  };
+  // build randomization
+  const profileViews = dqs('#profile_views');
+  const numViews = Math.ceil(Math.random() * (maxViews + 1))
+  profileViews.textContent = numViews;
 
-  const profUpdate = dqs('#edit_profile_form');
+  const profileConnections = dqs('#profile_connections');
+  const numConnections = Math.ceil(Math.random() * 650) + minConnections;
 
-  // ssd wip below 
+  if (numConnections >= 500 ) {
+    profileConnections.textContent = "500+";
+  }
+  else {
+    profileConnections.textContent = numConnections;
+  }
 
-  const userName = dqs('.profile_column_header');
-  const userTagline = dqs('#profile_intro');
-  const userImage = dqs('.profile_column_me');
-  const userHeader = dqs('.profile_column');
-  const editProfile = dqs('#edit_profile');
-  
-  const userViews = dqs('#profile_views');
-  const userConnections = dqs('#profile_connections');
-
-  // --------------------- set up event handlers here ------------------------------------- // 
-  userDOM.name.addEventListener('click', () => {
-    editUser = toggleDisplay(editUser, userDOM);
-  });
-
-  
-  fetch(userURL)
+  fetch(myURL)
   .then(resp => resp.json())
-  .then(user => {
-    renderUser(user, userDOM);
-  });
+  .then(myProfile => {
+    // console.log(myProfile.name);
+
+    const myName = dqs('.profile_column_header');
+    const myIntro = dqs('#profile_intro');
+    const myImage = dqs('.profile_column_me');
+    const myHeader = dqs('.profile_column');
+    const editProfile = dqs('#edit_profile');
+
+    myName.textContent = myProfile.name;
+    myIntro.textContent = myProfile.intro;
+    myImage.src = myProfile.image;
+    myHeader.style.backgroundImage = "url('./images/default.png')";
+    myHeader.style.backgroundSize = "220px";
+
+    myName.addEventListener('click', e => {
+      edit = !edit;
+      if (edit) {
+        editProfile.style.display = "block";
+      } else {
+        editProfile.style.display = "none";
+      }
+    });
+
+  })
 
   // profile update funcitonality                                 HERE HERE HERE                    !!!
 
+  const profUpdate = dqs('#edit_profile_form');
   // console.log(nameUpdate);
   profUpdate.addEventListener('submit', e => {
     e.preventDefault();
-    updateProfile(e);
+
+    
+
+    newName = e.target.name.value;
+    
+    newTagline = e.target.intro.value;
+    newImage = e.target.image.value;
+    // console.log(e.target.intro.value);
+    // console.log(e.target.image.value);
+
+    updateProfile(newName, newTagline, newImage);
+
+    
+
+    
+
     e.target.reset();
+
+
   })
 
   //  create post toggle
@@ -78,8 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createPostContainer = dqs('.create_post_form_container');
 
-    createPost = !createPost;
-    if (createPost) {
+    post = !post;
+    if (post) {
       createPostContainer.style.display = "block";
     }
     else {
@@ -93,16 +117,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const createPostForm = dqs('#create_post_form');
   
-  // document.addEventListener('submit', e => {
-  //   e.preventDefault();
-  //   const newPostContent = e.target.postContent.value;
-  //   const newPostImage = e.target.image.value;
+  document.addEventListener('submit', e => {
+    e.preventDefault();
+    const newPostContent = e.target.postContent.value;
+    const newPostImage = e.target.image.value;
 
   
-  //   renderMyPost(user.image, user.name, "me", user.intro, "blank", "Just now", newPostContent, newPostImage)
+    renderMyPost(myProfile.image, myProfile.name, "me", myProfile.intro, "blank", "Just now", newPostContent, newPostImage)
 
-  //   e.target.reset();
-  // })
+    e.target.reset();
+  })
 
 
 
@@ -271,102 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-//  ##################  ##################  ----------------------  // MAIN FUNCTION // ---------------------- #################  ##################  //
-
-// ------------------------------------------------------------------  //
-
-function generateUserStats(userViews, userConnections) {
-  const numViews = Math.ceil(Math.random() * (maxViews + 1))
-  userViews.textContent = numViews;
-
-  const numConnections = Math.ceil(Math.random() * 650) + minConnections;
-
-  if (numConnections >= 500 ) {
-    userConnections.textContent = "500+";
-  }
-  else {
-    userConnections.textContent = numConnections;
-  }
-};
-
-// ------------------------------------------------------------------  //
-// ------------------------------------------------------------------  //
-
-function renderUser(user, userDOM) {
-  userDOM.name.textContent = user.name;
-  userDOM.tagline.textContent = user.tagline;
-  userDOM.image.src = user.image;
-
-  generateUserStats(userDOM.views, userDOM.connections);
-};
-
-// ------------------------------------------------------------------  //
-// ------------------------------------------------------------------  //
-
-function toggleDisplay(toggle, userDOM) {
-  toggle = !toggle;
-  if (toggle) {
-    userDOM.edit.style.display = "block";
-  } 
-  else {
-    userDOM.edit.style.display = "none";
-  }
-  return toggle;
-};
-
-// ------------------------------------------------------------------  //
-// ------------------------------------------------------------------  //
-
-function updateProfile(e) {
-  console.log('working');
-
-  newName = e.target.name.value;
-  newTagline = e.target.intro.value;
-  newImage = e.target.image.value;
-
-  if (newName.length == 0) {
-    newName = 'Firstname Lastname';
-  }
-  else {
-    // nothing
-  }
-  if (newTagline.length == 0) {
-    newTagline = 'Job Title at Some Company';
-  }
-  else {
-    // nothing
-  }
-  if (newImage.length == 0) {
-    newImage = defaultImg;
-  }
-  else {
-    // nothing
-  }
-
-  const userName = dqs('.profile_column_header');
-  const userTagline = dqs('#profile_intro');
-  const userImage = dqs('.profile_column_me');
-  const myImage2 = dqs('.create_post_me');
-  const myImage3 = dqs(".nav_me");
-
-  userName.textContent = newName;
-  userTagline.textContent = newTagline;
-  userImage.src = newImage;
-  myImage2.src = newImage;
-  myImage3.src = newImage;
-}
-
-
-
-
-
-
-
-
-
-
-
-
+//  ----------------------  // MAIN FUNCTION // ---------------------- //
 
 // ------------------------------------------------------------------  //
 
@@ -689,6 +618,40 @@ function createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, ti
 // ------------------------------------------------------------------  //
 
 
+function updateProfile(newName = "Firstname Lastname", newTagline ="Tell us a bit about yourself", newImage=defaultImg) {
+  console.log('working');
+
+  if (newName.length == 0) {
+    newName = 'Firstname Lastname';
+  }
+  else {
+    // nothing
+  }
+  if (newTagline.length == 0) {
+    newTagline = 'Job Title at Some Company';
+  }
+  else {
+    // nothing
+  }
+  if (newImage.length == 0) {
+    newImage = defaultImg;
+  }
+  else {
+    // nothing
+  }
+
+  const myName = dqs('.profile_column_header');
+  const myIntro = dqs('#profile_intro');
+  const myImage = dqs('.profile_column_me');
+  const myImage2 = dqs('.create_post_me');
+  const myImage3 = dqs(".nav_me");
+
+  myName.textContent = newName;
+  myIntro.textContent = newTagline;
+  myImage.src = newImage;
+  myImage2.src = newImage;
+  myImage3.src = newImage;
+}
 
 //
 

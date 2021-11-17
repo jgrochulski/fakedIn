@@ -66,33 +66,36 @@
               type="text"
               name="name"
               value=""
-              placeholder="Update name..."
+              placeholder="Name"
               class="input-text"
               id="profile_name_input"
+              autocomplete="off"
             />
             <br />
             <input
               type="text"
               name="intro"
               value=""
-              placeholder="Update tagline..."
+              placeholder="Tagline"
               class="input-text"
               id="profile_tagline_input"
+              autocomplete="off"
             />
             <br />
             <input
               type="text"
               name="image"
               value=""
-              placeholder="Update profile picture..."
-              class="input-text"
+              placeholder="Add image url"
+              class="input-text-blue"
               id="profile_image_input"
+              autocomplete="off"
             />
             <br />
             <input
               type="submit"
               name="submit"
-              value="Submit"
+              value="Update"
               class="submit"
               id="profile_update_submit"
             />
@@ -112,13 +115,13 @@
             <form class="add_post_form">
               <!-- <h3>Create a toy!</h3> -->
               
-              <input
+              <!-- <input
                 type="text"
                 name="name"
                 value=""
                 placeholder="Start a post"
                 class="input-text"
-              />
+              /> -->
               <!-- <br /> -->
               <!-- <input
                 type="text"
@@ -131,12 +134,49 @@
               <input
                 type="submit"
                 name="submit"
-                value="✓"
+                value="Start a post"
                 class="submit_button"
+                id="start_a_post_button"
               />
             </form>
           </div>
           
+        </div>
+
+        <div class="create_post_form_container">
+          <div class="create_post_form_inner">
+            <form class="create_post_form" id="create_post_form">
+              <h4 id="create_post_h4">Create a post</h4>
+              <!-- <input
+                type="text"
+                name="intro"
+                value=""
+                placeholder="What do you want to talk about?"
+                class="input-text"
+                id="post_tagline_input"
+              /> -->
+              <textarea name="postContent" id="post_text_input" placeholder="What do you want to talk about?"></textarea>
+              <!-- <br /> -->
+              <input
+                type="text"
+                name="image"
+                value=""
+                placeholder="Add image url"
+                class="input-text-blue"
+                id="post_image_input"
+                autocomplete="off"
+              />
+              <br />
+              <input
+                type="submit"
+                name="submit"
+                value="Post"
+                class="submit"
+                id="post_update_submit"
+                autocomplete="off"
+              />
+            </form>
+          </div>
         </div>
         
         <!-- CONTENT POST IS HERERERERERERERERE -->
