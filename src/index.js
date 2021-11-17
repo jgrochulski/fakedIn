@@ -13,6 +13,7 @@ const postCount = 5;
 const verbosity = 5;
 const newsCount = 6;
 const maxViews = 36;
+const maxLikes = 1000;
 const minConnections = 50;
 
 let editUser = false;
@@ -340,7 +341,7 @@ function appendPost(e, postDOM) {
     <div class="content_likes">
       <span class="likes_span">
         <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
-        <span class="number_likes">11</span>
+        <span class="number_likes">1</span>
       </span>
     </div>
     <hr class="solid">
@@ -563,7 +564,7 @@ function renderPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzP
     <div class="content_likes">
       <span class="likes_span">
         <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
-        <span class="number_likes">11</span>
+        <span class="number_likes">${Math.floor(Math.random() * maxLikes)}</span>
       </span>
     </div>
     <hr class="solid">
@@ -615,7 +616,7 @@ function renderParagraphPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, ti
     <div class="content_likes">
       <span class="likes_span">
         <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
-        <span class="number_likes">11</span>
+        <span class="number_likes">${Math.floor(Math.random() * maxLikes)}</span>
       </span>
     </div>
     <hr class="solid">

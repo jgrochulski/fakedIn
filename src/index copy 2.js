@@ -6,7 +6,8 @@ const myURL = 'http://localhost:3000/myProfile';
 const jobURL = 'http://localhost:3000/jobs';
 const companiesURL = 'http://localhost:3000/companies';
 const imgURL = 'http://localhost:3000/images';
-const defaultImg = "./images/default_profile_small.png";
+const defaultImg = "./images/default_profile_small.png"
+
 
 const postCount = 5;
 const verbosity = 5;
