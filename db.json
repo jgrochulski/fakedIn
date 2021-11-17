@@ -2,8 +2,7 @@
   "user": {
     "name": "Janek Grochulski",
     "tagline": "Software Engineering Student at Flatiron School",
-    "image": "./images/me.jpg",
-    "header": "./images/header.jpg"
+    "image": "./images/me.jpg"
   },
   "jobs": [
     {

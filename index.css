@@ -53,6 +53,10 @@ h5 {
 
 header {
   display: flex;
+  position: fixed;
+  top: 0;
+  width: 80%;
+  z-index: 2;
   justify-content: space-between;
   align-items: center;
   padding: 12px 10%;
@@ -96,7 +100,7 @@ header {
   float: left;
   width: 500px;
   /* padding: 5px 5px; */
-  margin: 20px 10px;
+  margin: 20px 10px 0 365px;
   /* background-color: #fcfffcff; */
   border-radius: 10px;
 }
@@ -221,6 +225,7 @@ header {
 }
 
 .profile_column {
+  position: fixed;
   width: 220px;
   float: left;
   /* padding: 5px 5px; */
@@ -385,6 +390,7 @@ hr.solid {
 div.row {
   align-content: center;
   align-items: center;
+  margin: 50px 0 0 0;
 }
 
 #profile_who_views {

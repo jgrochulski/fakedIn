@@ -49,18 +49,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   };
 
-  // const profUpdate = dqs('#edit_profile_form');
 
-  // ssd wip below 
+  // 34345234-82734098123740192837401982374901273490817234908723904790 --- preparing to delete commented declarations below ---- 32840712349712093470123984170923 //
 
-  const userName = dqs('.profile_column_header');
-  const userTagline = dqs('#profile_intro');
-  const userImage = dqs('.profile_column_me');
-  const userHeader = dqs('.profile_column');
-  const editProfile = dqs('#edit_profile');
+  // const userName = dqs('.profile_column_header');
+  // const userTagline = dqs('#profile_intro');
+  // const userImage = dqs('.profile_column_me');
+  // const userHeader = dqs('.profile_column');
+  // const editProfile = dqs('#edit_profile');
   
-  const userViews = dqs('#profile_views');
-  const userConnections = dqs('#profile_connections');
+  // const userViews = dqs('#profile_views');
+  // const userConnections = dqs('#profile_connections');
 
   // --------------------- set up event handlers here ------------------------------------- // 
   userDOM.name.addEventListener('click', () => {
@@ -122,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       fetch(profilesURL)
       .then(resp => resp.json())
-      .then(profile => {
+      .then(profile => {                                              // ---------- get Profile Name and Pic
         const fakeProfile = profile.results[0];
         const fakeImg = fakeProfile.picture.medium;
         const fakeName = `${fakeProfile.name.first} ${fakeProfile.name.last}`;
@@ -131,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         fetch(`${jobURL}/${id}`)
         .then(resp => resp.json())
-        .then(job => {
+        .then(job => {                                                // ----------- get Job Title
           const fakeJob = job.name;
 
           const time = postTime();
@@ -139,14 +138,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
           fetch(companiesURL)
           .then(resp => resp.json())
-          .then(companies => {
+          .then(companies => {                                        // ----------- get Company Name
             const randC = Math.floor(Math.random() * 500);
 
             const fakeCompany = companies[0][randC];
 
             fetch(buzzURL)
             .then(resp => resp.json())
-            .then(phrase => {
+            .then(phrase => {                                         // ----------- get buzzPhrase 
 
               const buzzPhrase = phrase.phrase;
 
@@ -157,11 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(resp => resp.json())
                 .then(img => {
                   const postImg = img[Math.floor(Math.random() * img.length)];
-                  renderPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase, postImg);
+                  renderPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase, postImg);     // ------- render Image Post
                 });
               }
               else {
-                createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase);
+                createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase);       // ------- 
               }
 
             });
@@ -307,7 +306,18 @@ function appendPost(e, postDOM) {
   const postFeed = dqs('.content_column');
 
   const text = e.target.postContent.value;
-  const img = e.target.image.value;
+  let img = e.target.image.value;
+
+  if (img.length == 0) {
+    img = "";
+  }
+  else {
+    img = `
+    <div class="content_image">
+      <img class="content_image_img" src="${img}" alt="content_image">
+    </div>
+    `
+  }
 
   let post = document.createElement('div');
   post.className = 'content_post';
@@ -336,9 +346,7 @@ function appendPost(e, postDOM) {
       </div>
     </div>
     <div class="content_text">${text}</div>
-    <div class="content_image">
-      <img class="content_image_img" src="${img}" alt="content_image">
-    </div>
+    ${img}
     <div class="content_likes">
       <span class="likes_span">
         <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
@@ -353,6 +361,12 @@ function appendPost(e, postDOM) {
   </div>
   `;
 
+  const likeButton = post.querySelector('.like_button');
+  const likeCount = post.querySelector('.number_likes');
+  likeButton.addEventListener('click', e => {
+    likeCount.textContent++;
+  });
+
 
   createPost = toggleDisplay(createPost, postDOM.create);
 
@@ -363,14 +377,6 @@ function appendPost(e, postDOM) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 
 }
-
-
-
-
-
-
-
-
 
 // ------------------------------------------------------------------  //
 
@@ -576,6 +582,12 @@ function renderPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzP
   </div>
   `;
 
+  const likeButton = post.querySelector('.like_button');
+  const likeCount = post.querySelector('.number_likes');
+  likeButton.addEventListener('click', e => {
+    likeCount.textContent++;
+  });
+
   postFeed.appendChild(post);
 }
 
@@ -628,6 +640,13 @@ function renderParagraphPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, ti
   </div>
   `;
 
+  const likeButton = post.querySelector('.like_button');
+  const likeCount = post.querySelector('.number_likes');
+  likeButton.addEventListener('click', e => {
+    likeCount.textContent++;
+  });
+
+  
   postFeed.appendChild(post);
 }
 
@@ -690,8 +709,4 @@ function createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, ti
 
 // ------------------------------------------------------------------  //
 // ------------------------------------------------------------------  //
-
-
-
-//
 
