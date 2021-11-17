@@ -15,6 +15,7 @@ const newsCount = 6;
 const maxViews = 36;
 const maxLikes = 1000;
 const minConnections = 50;
+const imagePostProb = 0.8;
 
 let editUser = false;
 let createPost = false;
@@ -151,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
               const randPost = Math.random();
 
-              if (randPost < 0.6) {
+              if (randPost < imagePostProb) {
                 fetch(imgURL)
                 .then(resp => resp.json())
                 .then(img => {
