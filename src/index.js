@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     name: dqs('.profile_column_header'),
     tagline: dqs('#profile_intro'),
     image: dqs('.profile_column_me'),
+    image2: dqs('.create_post_me'),
+    image3: dqs(".nav_me"),
     header: dqs('.profile_column'),
     edit: dqs('#edit_profile'),
     views: dqs('#profile_views'),
@@ -66,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   userDOM.update.addEventListener('submit', e => {
     e.preventDefault();
     updateUser(e);
+    renderUser(currentUser, userDOM);
     e.target.reset();
   });
 
@@ -289,6 +292,8 @@ function renderUser(user, userDOM) {
   userDOM.name.textContent = user.name;
   userDOM.tagline.textContent = user.tagline;
   userDOM.image.src = user.image;
+  userDOM.image2.src = user.image;
+  userDOM.image3.src = user.image;
 
   generateUserStats(userDOM.views, userDOM.connections);
 };
@@ -336,17 +341,27 @@ function updateUser(e) {
     // nothing
   }
 
-  const userName = dqs('.profile_column_header');
-  const userTagline = dqs('#profile_intro');
-  const userImage = dqs('.profile_column_me');
-  const myImage2 = dqs('.create_post_me');
-  const myImage3 = dqs(".nav_me");
+  currentUser.name = newName;
+  currentUser.tagline = newTagline;
+  currentUser.image = newImage;
+  currentUser.image2 = newImage;
+  currentUser.image3 = newImage;
 
-  userName.textContent = newName;
-  userTagline.textContent = newTagline;
-  userImage.src = newImage;
-  myImage2.src = newImage;
-  myImage3.src = newImage;
+
+  // const userName = dqs('.profile_column_header');
+  // const userTagline = dqs('#profile_intro');
+  // const userImage = dqs('.profile_column_me');
+  // const myImage2 = dqs('.create_post_me');
+  // const myImage3 = dqs(".nav_me");
+
+  // userName.textContent = newName;
+  // userTagline.textContent = newTagline;
+  // userImage.src = newImage;
+  // myImage2.src = newImage;
+  // myImage3.src = newImage;
+
+
+  
 }
 
 // ------------------------------------------------------------------  //
