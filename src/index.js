@@ -79,98 +79,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   postDOM.form.addEventListener('submit', e => {
     e.preventDefault();
-    appendPost(e);
-    // will work here after rendering posts ~~~~~~~~~~~~~~~~~~~~~~~~
-
+    appendPost(e, postDOM);
     e.target.reset();
   });
 
-  // #######################################################################
+  window.addEventListener('scroll',()=>{
+    // console.log(window.scrollY) //scrolled from top
+    // console.log(window.innerHeight) //visible part of screen
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+      console.log("TRIGGERED");
+      renderContent();
+      
+    }
+})
 
-  function appendPost(e) {
+
   
-    const postFeed = dqs('.content_column');
-
-    const text = e.target.postContent.value;
-    const img = e.target.image.value;
-  
-    let post = document.createElement('div');
-    post.className = 'content_post';
-    post.innerHTML = `
-    <div class="content_post_inner">
-      <div class="content_profile">
-        <img class="content_profile_img" src="${currentUser.image}" alt="user_icon">
-        <div class="content_profile_stack">
-          <span class="stack_name_span">
-            <div class="stack_firstname_lastname">
-              ${currentUser.name}
-            </div>
-            <div class="stack_connection">
-              • me
-            </div>
-          </span>
-          <br/>
-          <span class="stack_title">
-            ${currentUser.tagline}
-          </span>
-          <br/>
-          <span class="stack_time">
-            Just Now •
-          </span>
-          <img class="global" src="images/global.png" width="14" alt="user_icon">
-        </div>
-      </div>
-      <div class="content_text">${text}</div>
-      <div class="content_image">
-        <img class="content_image_img" src="${img}" alt="content_image">
-      </div>
-      <div class="content_likes">
-        <span class="likes_span">
-          <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
-          <span class="number_likes">11</span>
-        </span>
-      </div>
-      <hr class="solid">
-      <span class="bottom_buttons">
-        <input type="button" class="like_button" value="      Like" />
-        <input type="button" class="comment_button" value="        Comment" />
-      </span>
-    </div>
-    `;
-  
-    // postFeed.prepend(post);
-
-    createPost = toggleDisplay(createPost, postDOM.create);
-
-    // postFeed.prepend(postDOM.container);
-    const referenceNode = postDOM.create;
-
-    newNode = post;
-
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-
-
-
-
-
-
-    // console.log(postDOM.start);
-
-    // postDOM.start.addEventListener('click', e => {
-    //   e.preventDefault();
-    //   createPost = toggleDisplay(createPost, postDOM.create);
-    // });
-  
-    // postDOM.form.addEventListener('submit', e => {
-    //   e.preventDefault();
-    //   appendPost(e);
-    //   // will work here after rendering posts ~~~~~~~~~~~~~~~~~~~~~~~~
-  
-    //   e.target.reset();
-    // });
-
-
-  }
 
   // #######################################################################
   
@@ -186,60 +110,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // -------------------- second fetch here ------------------------------------------------ //
   // build content 
-  for (let i = 0; i < postCount; i++) {
 
-    fetch(profilesURL)
-    .then(resp => resp.json())
-    .then(profile => {
-      const fakeProfile = profile.results[0];
-      const fakeImg = fakeProfile.picture.medium;
-      const fakeName = `${fakeProfile.name.first} ${fakeProfile.name.last}`;
+// 1203874102938479081237491293874190236418934159839847623498723 --- RENDER CONTENT --- @#$@!%#$^%@#$%^#$%&%$^$#^%!@$#!&^%&%$!@$%!$^%&$^%&$%^!@#%@~#%
 
-      let id = Math.ceil(Math.random() * 88);
+  renderContent();
 
-      fetch(`${jobURL}/${id}`)
+  function renderContent() {
+    for (let i = 0; i < postCount; i++) {
+
+      fetch(profilesURL)
       .then(resp => resp.json())
-      .then(job => {
-        const fakeJob = job.name;
+      .then(profile => {
+        const fakeProfile = profile.results[0];
+        const fakeImg = fakeProfile.picture.medium;
+        const fakeName = `${fakeProfile.name.first} ${fakeProfile.name.last}`;
 
-        const time = postTime();
-        const degree = connectionDegree();
+        let id = Math.ceil(Math.random() * 88);
 
-        fetch(companiesURL)
+        fetch(`${jobURL}/${id}`)
         .then(resp => resp.json())
-        .then(companies => {
-          const randC = Math.floor(Math.random() * 500);
+        .then(job => {
+          const fakeJob = job.name;
 
-          const fakeCompany = companies[0][randC];
+          const time = postTime();
+          const degree = connectionDegree();
 
-          fetch(buzzURL)
+          fetch(companiesURL)
           .then(resp => resp.json())
-          .then(phrase => {
+          .then(companies => {
+            const randC = Math.floor(Math.random() * 500);
 
-            const buzzPhrase = phrase.phrase;
+            const fakeCompany = companies[0][randC];
 
-            const randPost = Math.random();
+            fetch(buzzURL)
+            .then(resp => resp.json())
+            .then(phrase => {
 
-            if (randPost < 0.6) {
-              fetch(imgURL)
-              .then(resp => resp.json())
-              .then(img => {
-                const postImg = img[Math.floor(Math.random() * img.length)];
-                renderPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase, postImg);
-              });
-            }
-            else {
-              createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase);
-            }
+              const buzzPhrase = phrase.phrase;
 
+              const randPost = Math.random();
+
+              if (randPost < 0.6) {
+                fetch(imgURL)
+                .then(resp => resp.json())
+                .then(img => {
+                  const postImg = img[Math.floor(Math.random() * img.length)];
+                  renderPost(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase, postImg);
+                });
+              }
+              else {
+                createBuzzParagraph(fakeImg, fakeName, degree, fakeJob, fakeCompany, time, buzzPhrase);
+              }
+
+            });
+            
           });
-          
+
         });
 
       });
-
-    });
+    };
   };
+
+// 1203874102938479081237491293874190236418934159839847623498723 --- RENDER CONTENT --- @#$@!%#$^%@#$%^#$%&%$^$#^%!@$#!&^%&%$!@$%!$^%&$^%&$%^!@#%@~#%
 
   for (let i = 0; i < newsCount; i++) {
 
@@ -367,13 +300,67 @@ function updateUser(e) {
 // ------------------------------------------------------------------  //
 // ------------------------------------------------------------------  //
 
-function appendPost(e) {
-  newContent = e.target.postContent.value;
-  newImage = e.target.image.value;
+function appendPost(e, postDOM) {
+  
+  const postFeed = dqs('.content_column');
 
-  console.log(currentUser);
+  const text = e.target.postContent.value;
+  const img = e.target.image.value;
 
-};
+  let post = document.createElement('div');
+  post.className = 'content_post';
+  post.innerHTML = `
+  <div class="content_post_inner">
+    <div class="content_profile">
+      <img class="content_profile_img" src="${currentUser.image}" alt="user_icon">
+      <div class="content_profile_stack">
+        <span class="stack_name_span">
+          <div class="stack_firstname_lastname">
+            ${currentUser.name}
+          </div>
+          <div class="stack_connection">
+            • me
+          </div>
+        </span>
+        <br/>
+        <span class="stack_title">
+          ${currentUser.tagline}
+        </span>
+        <br/>
+        <span class="stack_time">
+          Just Now •
+        </span>
+        <img class="global" src="images/global.png" width="14" alt="user_icon">
+      </div>
+    </div>
+    <div class="content_text">${text}</div>
+    <div class="content_image">
+      <img class="content_image_img" src="${img}" alt="content_image">
+    </div>
+    <div class="content_likes">
+      <span class="likes_span">
+        <img class="likes_image" src="images/likes.png" width="14" alt="likes"> 
+        <span class="number_likes">11</span>
+      </span>
+    </div>
+    <hr class="solid">
+    <span class="bottom_buttons">
+      <input type="button" class="like_button" value="      Like" />
+      <input type="button" class="comment_button" value="        Comment" />
+    </span>
+  </div>
+  `;
+
+
+  createPost = toggleDisplay(createPost, postDOM.create);
+
+  const referenceNode = postDOM.create;
+
+  newNode = post;
+
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+
+}
 
 
 
