@@ -64,7 +64,6 @@ header {
   margin: 0;
 }
 
-
 .logo {
   cursor: pointer;
 }
@@ -100,7 +99,7 @@ header {
   float: left;
   width: 500px;
   /* padding: 5px 5px; */
-  margin: 20px 10px 0 365px;
+  margin: 20px 10px 0 27%;
   /* background-color: #fcfffcff; */
   border-radius: 10px;
 }
@@ -227,9 +226,12 @@ header {
 .profile_column {
   position: fixed;
   width: 220px;
-  float: left;
+
+  left: 27%;
+  /* right: auto; */
+  /* float: left; */
   /* padding: 5px 5px; */
-  margin: 20px 10px 0px 10%;
+  margin: 20px 10px 0px -238px;
   background-color: #fcfffcff;
   border: 0.5px solid #dedddaff;
   border-radius: 10px;
